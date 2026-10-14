@@ -12,8 +12,8 @@
   "use strict";
 
   // System Configuration
-  const HOME_HUB_URL = "#"; // Parent portal link
-  const STORAGE_KEY = "word_guess_data_v1";
+  const HOME_HUB_URL = "https://tileworksgamesstudio.github.io/CannaGames-Home/"; // Parent portal link
+  const STORAGE_KEY = "cannaword_guess_data_v1";
   const SETTINGS_KEY = "word_guess_settings_v1";
   const CSV_FILE = "puzzles.csv";
   const WORDS_FILE = "words.txt";
