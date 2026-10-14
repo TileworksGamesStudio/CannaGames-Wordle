@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Word Guess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Atmospheric Layers -->
+  <div class="bg-layer bg-micro-glow" aria-hidden="true"></div>
+  <div class="bg-layer bg-texture" aria-hidden="true"></div>
+  <div id="bg-icons" class="bg-layer bg-icons" aria-hidden="true"></div>
+
+  <div id="app" class="app-shell">
+
+    <!-- TOP HEADER (Shared Anchor) -->
+    <header class="site-header" role="banner">
+      <div class="header-left">
+        <a id="btn-home" class="icon-btn home-btn" href="#" role="button" aria-label="Return to Game Hub" title="Home Hub">
+          <svg class="nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <path d="M3 10.5L12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5H15v-6h-6v6H4.5A1.5 1.5 0 0 1 3 20v-9.5z" fill="currentColor"/>
+          </svg>
+        </a>
+        <h1 class="game-logo">WORD GUESS</h1>
+      </div>
+
+      <div id="header-game-controls" class="header-right hidden" aria-label="Game Screen Controls">
+        <button id="btn-game-rules" class="icon-btn" aria-label="How to play" title="Instructions">
+          <svg class="nav-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3v1m0 3h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-game-stats" class="icon-btn" aria-label="View statistics" title="Stats">
+          <svg class="nav-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="4" y="13" width="3.5" height="7" rx="0.5" fill="currentColor"/><rect x="10.25" y="8" width="3.5" height="12" rx="0.5" fill="currentColor"/><rect x="16.5" y="3" width="3.5" height="17" rx="0.5" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- VIEW 1: MAIN MENU -->
+    <main id="view-menu" class="view view-menu" aria-label="Main Menu">
+      <div class="menu-container">
+        
+        <!-- Primary 4 Menu Buttons (Identical Geometry & Family) -->
+        <nav class="primary-nav" aria-label="Main Actions">
+          <button id="nav-daily" class="menu-btn menu-btn-primary">
+            <div class="menu-btn-content">
+              <span class="menu-btn-badge" id="menu-daily-badge">TODAY</span>
+              <span class="menu-btn-title">Play Word Guess</span>
+              <span id="menu-daily-status" class="menu-btn-desc">Ready to play</span>
+            </div>
+            <span class="menu-btn-affordance" aria-hidden="true">→</span>
+          </button>
+
+          <button id="nav-vault" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">Vault</span>
+              <span id="menu-vault-count" class="menu-btn-desc">Archived puzzles</span>
+            </div>
+            <span class="menu-btn-affordance" aria-hidden="true">→</span>
+          </button>
+
+          <button id="nav-settings" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">Settings</span>
+              <span class="menu-btn-desc">Preferences & animation</span>
+            </div>
+            <span class="menu-btn-affordance" aria-hidden="true">→</span>
+          </button>
+
+          <button id="nav-rules" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">How to Play</span>
+              <span class="menu-btn-desc">Rules & feedback guide</span>
+            </div>
+            <span class="menu-btn-affordance" aria-hidden="true">→</span>
+          </button>
+        </nav>
+
+        <!-- Centered Bottom Utility Row (3 buttons) -->
+        <div class="utility-row" aria-label="Quick Actions">
+          <button id="btn-utility-stats" class="utility-btn" aria-label="Player Statistics" title="Player Stats">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="4" y="13" width="3.5" height="7" rx="0.5" fill="currentColor"/><rect x="10.25" y="8" width="3.5" height="12" rx="0.5" fill="currentColor"/><rect x="16.5" y="3" width="3.5" height="17" rx="0.5" fill="currentColor"/></svg>
+            <span class="utility-btn-label">Stats</span>
+          </button>
+
+          <button id="btn-utility-share" class="utility-btn" aria-label="Share Game" title="Share Game">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="utility-btn-label">Share</span>
+          </button>
+
+          <button id="btn-utility-plus" class="utility-btn" aria-label="Additional Games" title="More Information">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            <span class="utility-btn-label">More</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- VIEW 2: VAULT (ARCHIVE) -->
+    <section id="view-vault" class="view view-sub hidden" aria-label="Puzzle Vault">
+      <div class="sub-view-bar">
+        <button id="btn-vault-back" class="text-nav-btn" aria-label="Back to Menu">
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <h2 class="sub-view-title">VAULT</h2>
+        <div class="bar-spacer" aria-hidden="true"></div>
+      </div>
+      
+      <div class="sub-view-scroll">
+        <p class="section-note">Select an archived daily puzzle to solve or review:</p>
+        <div id="vault-list" class="vault-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: GAMEPLAY -->
+    <section id="view-game" class="view view-game hidden" aria-label="Gameplay Screen">
+      <div class="sub-view-bar">
+        <button id="btn-game-back" class="text-nav-btn" aria-label="Back to Main Menu">
+          <span aria-hidden="true">←</span> Menu
+        </button>
+        <div class="game-meta-group">
+          <span id="game-puzzle-title" class="sub-view-title">DAILY PUZZLE</span>
+          <span id="game-puzzle-date" class="game-date-badge">Today</span>
+        </div>
+        <span id="game-status-pill" class="status-pill hidden">COMPLETED</span>
+      </div>
+
+      <div class="gameplay-area">
+        <!-- Centered Responsive Word Board -->
+        <div class="board-frame">
+          <div id="board" class="board" role="grid" aria-label="5 letter guess grid with 6 attempts">
+            <!-- 6 rows x 5 tiles generated in JS -->
+          </div>
+        </div>
+
+        <!-- Virtual Keyboard -->
+        <div class="keyboard-wrap">
+          <div id="keyboard" class="keyboard" role="group" aria-label="Virtual on-screen keyboard">
+            <!-- Generated dynamically in JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- HOW TO PLAY PANEL (RIGHT-TO-LEFT ONLY SLIDE PANEL) -->
+  <div id="panel-rules-overlay" class="panel-overlay" aria-hidden="true">
+    <aside id="panel-rules" class="slide-panel" role="dialog" aria-modal="true" aria-labelledby="rules-panel-heading">
+      <header class="panel-header">
+        <h2 id="rules-panel-heading" class="panel-title">HOW TO PLAY</h2>
+        <button id="btn-rules-close" class="panel-close-btn" aria-label="Close Instructions">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </header>
+      <div class="panel-body">
+        <section class="rules-section">
+          <p class="rules-lead">Guess the mystery 5-letter word in <strong>6 attempts</strong>.</p>
+          <p class="rules-text">Each guess must be a valid English word. Press <strong>Enter</strong> to submit.</p>
+        </section>
+        
+        <section class="rules-section">
+          <h3 class="rules-subtitle">Tile Feedback Colors</h3>
+          <div class="rule-examples">
+            <div class="rule-item">
+              <span class="sample-tile tile-correct" aria-label="Green">W</span>
+              <div class="rule-desc">
+                <strong>Green</strong>
+                <span>Correct letter in the exact correct position.</span>
+              </div>
+            </div>
+            <div class="rule-item">
+              <span class="sample-tile tile-present" aria-label="Amber">O</span>
+              <div class="rule-desc">
+                <strong>Amber</strong>
+                <span>Letter is in the word, but in a different spot.</span>
+              </div>
+            </div>
+            <div class="rule-item">
+              <span class="sample-tile tile-absent" aria-label="Grey">R</span>
+              <div class="rule-desc">
+                <strong>Grey</strong>
+                <span>Letter does not appear anywhere in the target word.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rules-section">
+          <h3 class="rules-subtitle">Daily Release</h3>
+          <p class="rules-text">A brand-new puzzle is released every day at midnight (Europe/London time). Previous puzzles remain accessible in the Vault.</p>
+        </section>
+      </div>
+      <footer class="panel-footer">
+        <button id="btn-rules-done" class="dialog-action-btn primary-action">Understood</button>
+      </footer>
+    </aside>
+  </div>
+
+  <!-- SETTINGS MODAL DIALOG -->
+  <dialog id="modal-settings" class="unified-dialog">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <h2 class="dialog-title">SETTINGS</h2>
+        <button class="panel-close-btn" data-close="modal-settings" aria-label="Close settings">&times;</button>
+      </header>
+      <div class="dialog-body">
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-label">Background Animation</span>
+            <span class="setting-hint">Ambient floating botanical leaves</span>
+          </div>
+          <div class="toggle-switch-group" role="radiogroup" aria-label="Background Animation Setting">
+            <button id="setting-anim-on" class="toggle-btn" role="radio" aria-checked="true">On</button>
+            <button id="setting-anim-off" class="toggle-btn" role="radio" aria-checked="false">Off</button>
+          </div>
+        </div>
+      </div>
+      <footer class="dialog-footer">
+        <button class="dialog-action-btn primary-action" data-close="modal-settings">Done</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- STATISTICS MODAL DIALOG -->
+  <dialog id="modal-stats" class="unified-dialog">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <h2 class="dialog-title">STATISTICS</h2>
+        <button class="panel-close-btn" data-close="modal-stats" aria-label="Close statistics">&times;</button>
+      </header>
+      <div class="dialog-body">
+        <div class="stats-metric-grid">
+          <div class="metric-card">
+            <span id="stat-played" class="metric-num">0</span>
+            <span class="metric-lbl">Played</span>
+          </div>
+          <div class="metric-card">
+            <span id="stat-winrate" class="metric-num">0%</span>
+            <span class="metric-lbl">Win %</span>
+          </div>
+          <div class="metric-card">
+            <span id="stat-streak" class="metric-num">0</span>
+            <span class="metric-lbl">Streak</span>
+          </div>
+          <div class="metric-card">
+            <span id="stat-maxstreak" class="metric-num">0</span>
+            <span class="metric-lbl">Max</span>
+          </div>
+        </div>
+
+        <h3 class="dist-heading">GUESS DISTRIBUTION</h3>
+        <div id="distribution-chart" class="dist-chart" role="img" aria-label="Guess Distribution Histogram"></div>
+      </div>
+      <footer class="dialog-footer">
+        <button class="dialog-action-btn primary-action" data-close="modal-stats">Close</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- RESULT MODAL DIALOG -->
+  <dialog id="modal-result" class="unified-dialog">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <h2 id="result-title" class="dialog-title">PUZZLE COMPLETE</h2>
+        <button class="panel-close-btn" data-close="modal-result" aria-label="Close summary">&times;</button>
+      </header>
+      <div class="dialog-body result-center">
+        <span class="result-lead-label">The target word was</span>
+        <span id="result-word" class="result-big-word">SHAKE</span>
+        <p id="result-definition" class="result-def-text"></p>
+        <p id="result-summary" class="result-score-text">Solved in 4 of 6 guesses.</p>
+      </div>
+      <footer class="dialog-footer result-footer-grid">
+        <button id="btn-share-result" class="dialog-action-btn primary-action">Share Result</button>
+        <button id="btn-result-vault" class="dialog-action-btn secondary-action">Browse Vault</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- ACCESSIBLE TOAST NOTIFICATIONS -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
